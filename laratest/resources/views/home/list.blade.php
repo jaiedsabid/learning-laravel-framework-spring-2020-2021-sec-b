@@ -20,6 +20,11 @@
         nav a {
             margin-left: 10px;
         }
+        .error-message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +61,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="error-message">
+            {{ session('error-msg') }}
+        </div>
     </div>
 </body>
 </html>

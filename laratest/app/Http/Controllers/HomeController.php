@@ -70,15 +70,30 @@ class HomeController extends Controller
 
     public function deleteUser($id, Request $req) {
         if($req->session()->has('username')) {
+            return view('home.confirm');
+        }
+        else {
+            $req->session()->flash('error-msg', 'Unauthorized access!');
+            return redirect('/login');
+        }
+    }
+
+    public function confirmDelete($id, Request $req) {
+        if($req->session()->has('username')) {
             $userlist = $this->getUserList();
 
-            for($i = 0; $i < count($userlist); $i++) {
-                if($userlist[$i]['id'] == $id) {
-                    unset($userlist[$i]);
-                    break;
+            if($req->confirm == 'Yes') {
+                for($i = 0; $i < count($userlist); $i++) {
+                    if($userlist[$i]['id'] == $id) {
+                        unset($userlist[$i]);
+                        break;
+                    }
                 }
             }
-
+            else {
+                $req->session()->flash('error-msg', 'Unable to delete the user!');
+                return redirect('/home/userlist');
+            }
             return view('home.list')->with('list', $userlist);
         }
         else {
