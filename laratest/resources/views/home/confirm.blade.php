@@ -33,6 +33,7 @@
         <h1>Confirmation message</h1>
         <p>If you want to apply this changes please type <span>'Yes'</span> in the box below: </p>
         <form action="" method="post">
+            @csrf
             <input type="text" name="confirm" id="confirm">
             <input type="submit" value="submit">
         </form>

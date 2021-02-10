@@ -10,6 +10,7 @@
     <h1>Create New user</h1>
 
     <form method="post">
+        @csrf
 		<fieldset>
 			<legend>Add</legend>
 			<table>

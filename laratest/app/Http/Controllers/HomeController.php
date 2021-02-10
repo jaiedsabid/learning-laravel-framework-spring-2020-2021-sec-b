@@ -68,7 +68,7 @@ class HomeController extends Controller
 
     }
 
-    public function deleteUser($id, Request $req) {
+    public function deleteUser(Request $req) {
         if($req->session()->has('username')) {
             return view('home.confirm');
         }

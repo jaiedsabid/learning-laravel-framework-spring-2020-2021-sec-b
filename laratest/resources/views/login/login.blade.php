@@ -29,6 +29,7 @@
 </head>
 <body>
     <form action="" method="POST">
+        @csrf
         <fieldset>
             <legend>Login</legend>
             <label for="username">Username:
@@ -37,7 +38,7 @@
             <label for="password">Password:
                 <input id="password" name="password" type="password">
             </label>
-            <input type="submit">
+            <input type="submit" value="login">
         </fieldset>
     </form>
     <div id="error-message">
