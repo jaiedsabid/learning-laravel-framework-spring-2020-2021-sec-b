@@ -6,110 +6,67 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Request $req) {
-        if($req->session()->has('username')) {
-            return view('home.index');
-        }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
-        }
+    public function index() {
+        return view('home.index');
     }
 
-    public function userList(Request $req) {
-        if($req->session()->has('username')) {
-            $user_list = $this->getUserList();
-            return view('home.list')->with('list', $user_list);
-        }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
-        }
+    public function userList() {
+        $user_list = $this->getUserList();
+        return view('home.list')->with('list', $user_list);
     }
 
-    public function editUser($id, Request $req) {
-        if($req->session()->has('username')) {
-            $userlist = $this->getUserList();
-            $user = [];
+    public function editUser($id) {
+        $userlist = $this->getUserList();
+        $user = [];
 
-            foreach($userlist as $suser) {
-                if($suser['id'] == $id) {
-                    $user = $suser;
-                    break;
-                }
+        foreach($userlist as $suser) {
+            if($suser['id'] == $id) {
+                $user = $suser;
+                break;
             }
-            return view('home.edit')->with('user', $user);
         }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
-        }
+        return view('home.edit')->with('user', $user);
     }
 
     public function updateUser($id, Request $req) {
-        if($req->session()->has('username')) {
-            $userlist = $this->getUserList();
+        $userlist = $this->getUserList();
 
-            for($i = 0; $i < count($userlist); $i++) {
-                if($userlist[$i]['id'] == $id) {
-                    $userlist[$i]['name'] = $req->name;
-                    $userlist[$i]['email'] = $req->email;
-                    $userlist[$i]['password'] = $req->password;
-                    break;
-                }
+        for($i = 0; $i < count($userlist); $i++) {
+            if($userlist[$i]['id'] == $id) {
+                $userlist[$i]['name'] = $req->name;
+                $userlist[$i]['email'] = $req->email;
+                $userlist[$i]['password'] = $req->password;
+                break;
             }
-
-            return view('home.list')->with('list', $userlist);
-        }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
         }
 
+        return view('home.list')->with('list', $userlist);
     }
 
-    public function deleteUser(Request $req) {
-        if($req->session()->has('username')) {
-            return view('home.confirm');
-        }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
-        }
+    public function deleteUser() {
+        return view('home.confirm');
     }
 
     public function confirmDelete($id, Request $req) {
-        if($req->session()->has('username')) {
-            $userlist = $this->getUserList();
+        $userlist = $this->getUserList();
 
-            if($req->confirm == 'Yes') {
-                for($i = 0; $i < count($userlist); $i++) {
-                    if($userlist[$i]['id'] == $id) {
-                        unset($userlist[$i]);
-                        break;
-                    }
+        if($req->confirm == 'Yes') {
+            for($i = 0; $i < count($userlist); $i++) {
+                if($userlist[$i]['id'] == $id) {
+                    unset($userlist[$i]);
+                    break;
                 }
             }
-            else {
-                $req->session()->flash('error-msg', 'Unable to delete the user!');
-                return redirect('/home/userlist');
-            }
-            return view('home.list')->with('list', $userlist);
         }
         else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
+            $req->session()->flash('error-msg', 'Unable to delete the user!');
+            return redirect('/home/userlist');
         }
+        return view('home.list')->with('list', $userlist);
     }
 
-    public function createUser(Request $req) {
-        if($req->session()->has('username')) {
-            return view('home.create');
-        }
-        else {
-            $req->session()->flash('error-msg', 'Unauthorized access!');
-            return redirect('/login');
-        }
+    public function createUser() {
+        return view('home.create');
     }
 
     public function storeUser(Request $req) {
