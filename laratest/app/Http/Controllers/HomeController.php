@@ -79,7 +79,7 @@ class HomeController extends Controller
 
     public function getUserList() {
         $userList = [
-            ['id'=>1, 'name'=>'jaiedsabid', 'email'=>'jaiedsabid@gmail.com', 'password'=>'12345'],
+            ['id'=>1, 'name'=>'jaied', 'email'=>'jaied@email.com', 'password'=>'12345'],
             ['id'=>2, 'name'=>'alamin', 'email'=>'alamin@aiub.edu', 'password'=>'123'],
             ['id'=>3, 'name'=>'abc', 'email'=>'abc@aiub.edu', 'password'=>'456'],
             ['id'=>4, 'name'=>'xyz', 'email'=>'xyz@aiub.edu', 'password'=>'789']

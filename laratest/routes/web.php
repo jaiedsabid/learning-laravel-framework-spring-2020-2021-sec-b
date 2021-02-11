@@ -19,13 +19,15 @@ Route::get('/logout', 'LogoutControl@index');
 
 Route::middleware([SessionVerify::class])->group(function() {
     Route::get('/home', 'HomeController@index');
-    Route::get('/home/userlist', 'HomeController@userList');
-    Route::get('/home/edit/{id}', 'HomeController@editUser');
-    Route::post('/home/edit/{id}', 'HomeController@updateUser');
-    Route::get('/home/delete/{id}', 'HomeController@deleteUser');
-    Route::post('/home/delete/{id}', 'HomeController@confirmDelete');
-    Route::get('/home/create', 'HomeController@createUser');
-    Route::post('/home/create', 'HomeController@storeUser');
+    Route::middleware([CheckAdmin::class])->group(function() {
+        Route::get('/home/userlist', 'HomeController@userList');
+        Route::get('/home/edit/{id}', 'HomeController@editUser');
+        Route::post('/home/edit/{id}', 'HomeController@updateUser');
+        Route::get('/home/delete/{id}', 'HomeController@deleteUser');
+        Route::post('/home/delete/{id}', 'HomeController@confirmDelete');
+        Route::get('/home/create', 'HomeController@createUser');
+        Route::post('/home/create', 'HomeController@storeUser');
+    });
 });
 
 Route::get('/', function () {

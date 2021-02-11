@@ -10,6 +10,10 @@
         nav a {
             margin-left: 10px;
         }
+        .error-msg {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -19,5 +23,8 @@
         <a href="/logout">Logout</a>
     </nav>
     <h1>Welcome {{ session('username') }}!</h1>
+    <div class="error-msg">
+        {{ session('error-msg') }}
+    </div>
 </body>
 </html>
