@@ -25,6 +25,12 @@
             font-weight: bold;
             color: red;
         }
+        .success-message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+
     </style>
 </head>
 <body>
@@ -40,22 +46,24 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>NAME</th>
+                <th>USERNAME</th>
                 <th>EMAIL</th>
                 <th>PASSWORD</th>
-                <th>Action</th>
+                <th>USER TYPE</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
             @foreach($list as $item)
             <tr>
-                <td>{{ $item['id'] }}</td>
-                <td>{{ $item['name'] }}</td>
+                <td>{{ $item['user_id'] }}</td>
+                <td>{{ $item['username'] }}</td>
                 <td>{{ $item['email'] }}</td>
                 <td>{{ $item['password'] }}</td>
+                <td>{{ $item['type'] }}</td>
                 <td>
-                    <a href="/home/edit/{{ $item['id'] }}">Edit</a> |
-                    <a href="/home/delete/{{ $item['id'] }}">Delete</a>
+                    <a href="/home/edit/{{ $item['user_id'] }}">Edit</a> |
+                    <a href="/home/delete/{{ $item['user_id'] }}">Delete</a>
                 </td>
             </tr>
             @endforeach
@@ -63,6 +71,9 @@
         </table>
         <div class="error-message">
             {{ session('error-msg') }}
+        </div>
+        <div class="success-message">
+            {{ session('success-msg') }}
         </div>
     </div>
 </body>

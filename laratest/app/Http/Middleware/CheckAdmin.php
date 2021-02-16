@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CheckAdmin
 {
@@ -17,7 +18,8 @@ class CheckAdmin
     public function handle(Request $request, Closure $next)
     {
         $username = $request->session()->get('username');
-        if($username == 'admin') {
+        $data = User::where('username', $username)->get();
+        if($data[0]['type'] == 'admin') {
             return $next($request);
         }
         else {

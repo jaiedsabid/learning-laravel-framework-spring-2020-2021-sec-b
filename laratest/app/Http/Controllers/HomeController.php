@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -11,36 +12,33 @@ class HomeController extends Controller
     }
 
     public function userList() {
-        $user_list = $this->getUserList();
+        $user_list = User::all();
         return view('home.list')->with('list', $user_list);
     }
 
     public function editUser($id) {
-        $userlist = $this->getUserList();
-        $user = [];
-
-        foreach($userlist as $suser) {
-            if($suser['id'] == $id) {
-                $user = $suser;
-                break;
-            }
-        }
-        return view('home.edit')->with('user', $user);
+        $user = User::where('user_id', $id)->get();
+        return view('home.edit')->with('user', $user[0]);
     }
 
     public function updateUser($id, Request $req) {
-        $userlist = $this->getUserList();
 
-        for($i = 0; $i < count($userlist); $i++) {
-            if($userlist[$i]['id'] == $id) {
-                $userlist[$i]['name'] = $req->name;
-                $userlist[$i]['email'] = $req->email;
-                $userlist[$i]['password'] = $req->password;
-                break;
-            }
+        $user = [
+                'username'=>$req->username,
+                'email'=>$req->email,
+                'password'=>$req->password
+        ];
+        $updated = User::where('user_id', $id)
+            ->update($user);
+
+        if($updated) {
+            $req->session()->flash('success-msg', 'User Information updated successfully');
+        }
+        else {
+            $req->session()->flash('error-msg', 'Unable to update User Information!');
         }
 
-        return view('home.list')->with('list', $userlist);
+        return redirect('/home/userlist');
     }
 
     public function deleteUser() {
@@ -48,21 +46,14 @@ class HomeController extends Controller
     }
 
     public function confirmDelete($id, Request $req) {
-        $userlist = $this->getUserList();
-
-        if($req->confirm == 'Yes') {
-            for($i = 0; $i < count($userlist); $i++) {
-                if($userlist[$i]['id'] == $id) {
-                    unset($userlist[$i]);
-                    break;
-                }
-            }
+        $deleted = User::where('user_id', $id)->delete();
+        if($deleted) {
+            $req->session()->flash('success-msg', 'User deleted successfully');
         }
         else {
-            $req->session()->flash('error-msg', 'Unable to delete the user!');
-            return redirect('/home/userlist');
+            $req->session()->flash('error-msg', 'User deletion failed!');
         }
-        return view('home.list')->with('list', $userlist);
+        return redirect('/home/userlist');
     }
 
     public function createUser() {
@@ -70,21 +61,24 @@ class HomeController extends Controller
     }
 
     public function storeUser(Request $req) {
-        $userlist = $this->getUserList();
-        $user = ['id'=>$req->id, 'name'=>$req->name, 'email'=>$req->email, 'password'=>$req->password];
-        array_push($userlist, $user);
-
-        return view('home.list')->with('list', $userlist);
-    }
-
-    public function getUserList() {
-        $userList = [
-            ['id'=>1, 'name'=>'jaied', 'email'=>'jaied@email.com', 'password'=>'12345'],
-            ['id'=>2, 'name'=>'alamin', 'email'=>'alamin@aiub.edu', 'password'=>'123'],
-            ['id'=>3, 'name'=>'abc', 'email'=>'abc@aiub.edu', 'password'=>'456'],
-            ['id'=>4, 'name'=>'xyz', 'email'=>'xyz@aiub.edu', 'password'=>'789']
+        $user_id = (User::max('user_id'))+1;
+        $user = [
+                'user_id'=>$user_id,
+                'username'=>$req->username,
+                'email'=>$req->email,
+                'password'=>$req->password,
+                'type'=>'member'
         ];
 
-        return $userList;
+        $created = User::insert($user);
+
+        if($created) {
+            $req->session()->flash('success-msg', 'User created successfully');
+        }
+        else {
+            $req->session()->flash('error-msg', 'User creation failed!');
+        }
+        return redirect('/home/userlist');
     }
+
 }

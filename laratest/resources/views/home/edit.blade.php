@@ -7,7 +7,7 @@
     <title>Edit User</title>
 </head>
 <body>
-    <h1>Edit User, {{ $user['id'] }}</h1>
+    <h1>Edit User, {{ $user['user_id'] }}</h1>
 
     <form method="post">
         @csrf
@@ -16,7 +16,7 @@
 			<table>
 				<tr>
 					<td>Username</td>
-					<td><input type="text" name="name" value="{{ $user['name'] }}"></td>
+					<td><input type="text" name="username" value="{{ $user['username'] }}"></td>
 				</tr>
 				<tr>
 					<td>Password</td>
