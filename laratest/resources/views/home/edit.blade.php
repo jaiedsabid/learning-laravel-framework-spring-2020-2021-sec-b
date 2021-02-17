@@ -26,6 +26,15 @@
 					<td>Email</td>
 					<td><input type="text" name="email" value="{{ $user['email'] }}"></td>
 				</tr>
+                <tr>
+                    <td>Type</td>
+                    <td>
+                        <select name="type" id="type">
+                            <option value="member" @if($user['type'] == 'member') selected @endif>Member</option>
+                            <option value="admin" @if($user['type'] == 'admin') selected @endif>Admin</option>
+                        </select>
+                    </td>
+                </tr>
 				<tr>
 					<td></td>
 					<td><input type="submit" name="submit" value="update"></td>

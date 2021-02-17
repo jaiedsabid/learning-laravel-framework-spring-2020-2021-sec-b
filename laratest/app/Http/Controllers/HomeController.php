@@ -26,10 +26,11 @@ class HomeController extends Controller
         $user = [
                 'username'=>$req->username,
                 'email'=>$req->email,
-                'password'=>$req->password
+                'password'=>$req->password,
+                'type'=>$req->type
         ];
         $updated = User::where('user_id', $id)
-            ->update($user);
+                        ->update($user);
 
         if($updated) {
             $req->session()->flash('success-msg', 'User Information updated successfully');
@@ -61,16 +62,12 @@ class HomeController extends Controller
     }
 
     public function storeUser(Request $req) {
-        $user_id = (User::max('user_id'))+1;
-        $user = [
-                'user_id'=>$user_id,
-                'username'=>$req->username,
-                'email'=>$req->email,
-                'password'=>$req->password,
-                'type'=>'member'
-        ];
-
-        $created = User::insert($user);
+        $user = new User();
+        $user->username = $req->username;
+        $user->email= $req->email;
+        $user->password = $req->password;
+        $user->type = $req->type;
+        $created = $user->save();
 
         if($created) {
             $req->session()->flash('success-msg', 'User created successfully');
