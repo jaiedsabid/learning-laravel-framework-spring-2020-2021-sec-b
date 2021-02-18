@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create User</title>
+    <style>
+        nav {
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="/home/userlist">Back</a></li>
+        </ul>
+    </nav>
     <h1>Create New user</h1>
 
     <form method="post">

@@ -27,6 +27,7 @@ Route::middleware([SessionVerify::class])->group(function() {
         Route::post('/home/delete/{id}', 'HomeController@confirmDelete');
         Route::get('/home/create', 'HomeController@createUser');
         Route::post('/home/create', 'HomeController@storeUser');
+        Route::get('/home/details/{id}', 'HomeController@userDetails');
     });
 });
 

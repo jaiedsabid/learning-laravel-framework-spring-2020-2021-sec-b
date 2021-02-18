@@ -78,4 +78,9 @@ class HomeController extends Controller
         return redirect('/home/userlist');
     }
 
+    public function userDetails($id) {
+        $user = User::find($id);
+        return view('home.details')->with('user', $user);
+    }
+
 }

@@ -63,7 +63,8 @@
                 <td>{{ $item['type'] }}</td>
                 <td>
                     <a href="/home/edit/{{ $item['user_id'] }}">Edit</a> |
-                    <a href="/home/delete/{{ $item['user_id'] }}">Delete</a>
+                    <a href="/home/delete/{{ $item['user_id'] }}">Delete</a> |
+                    <a href="/home/details/{{ $item['user_id'] }}">Details</a>
                 </td>
             </tr>
             @endforeach
