@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\confirmDelRequest;
+use App\Http\Requests\createRequest;
+use App\Http\Requests\editRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -21,7 +25,7 @@ class HomeController extends Controller
         return view('home.edit')->with('user', $user[0]);
     }
 
-    public function updateUser($id, Request $req) {
+    public function updateUser($id, editRequest $req) {
 
         $user = [
                 'username'=>$req->username,
@@ -39,14 +43,14 @@ class HomeController extends Controller
             $req->session()->flash('error-msg', 'Unable to update User Information!');
         }
 
-        return redirect('/home/userlist');
+        return redirect()->route('home.userList');
     }
 
     public function deleteUser() {
         return view('home.confirm');
     }
 
-    public function confirmDelete($id, Request $req) {
+    public function confirmDelete($id, confirmDelRequest $req) {
         $deleted = User::where('user_id', $id)->delete();
         if($deleted) {
             $req->session()->flash('success-msg', 'User deleted successfully');
@@ -54,14 +58,14 @@ class HomeController extends Controller
         else {
             $req->session()->flash('error-msg', 'User deletion failed!');
         }
-        return redirect('/home/userlist');
+        return redirect()->route('home.userList');
     }
 
     public function createUser() {
         return view('home.create');
     }
 
-    public function storeUser(Request $req) {
+    public function storeUser(createRequest $req) {
         $user = new User();
         $user->username = $req->username;
         $user->email= $req->email;
@@ -75,7 +79,7 @@ class HomeController extends Controller
         else {
             $req->session()->flash('error-msg', 'User creation failed!');
         }
-        return redirect('/home/userlist');
+        return redirect()->route('home.userList');
     }
 
     public function userDetails($id) {

@@ -30,7 +30,7 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/home/userlist">Back</a></li>
+            <li><a href="{{ route('home.userList') }}">Back</a></li>
         </ul>
     </nav>
     <h1>User Details</h1>
@@ -60,7 +60,7 @@
                 <td></td>
                 <td>
                     <button id="delete-user">
-                        <a href="/home/delete/{{ $user['user_id'] }}">
+                        <a href="{{ route('home.deleteUser', $user['user_id']) }}">
                             Delete
                         </a>
                     </button>

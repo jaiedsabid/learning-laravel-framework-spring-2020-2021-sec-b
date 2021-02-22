@@ -17,7 +17,7 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/home/userlist">Back</a></li>
+            <li><a href="{{ route('home.userList') }}">Back</a></li>
         </ul>
     </nav>
     <h1>Create New user</h1>
@@ -29,15 +29,18 @@
 			<table>
 				<tr>
 					<td>Username</td>
-					<td><input type="text" name="username"></td>
+					<td><input type="text" name="username" value="{{ old('username') }}"></td>
+                    <td>{{ $errors->first('username') }}</td>
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="password" name="password"></td>
+					<td><input type="password" name="password" value="{{ old('password') }}"></td>
+                    <td>{{ $errors->first('password') }}</td>
 				</tr>
                 <tr>
 					<td>Email</td>
-					<td><input type="text" name="email"></td>
+					<td><input type="text" name="email" value="{{ old('email') }}"></td>
+                    <td>{{ $errors->first('email') }}</td>
 				</tr>
                 <tr>
                     <td>Type</td>

@@ -35,9 +35,9 @@
 </head>
 <body>
     <nav>
-        <a href="/home">Back</a>
-        <a href="/home/create">Create User</a>
-        <a href="/logout">Logout</a>
+        <a href="{{ route('home.index') }}">Back</a>
+        <a href="{{ route('home.createUser') }}">Create User</a>
+        <a href="{{ route('logout.index') }}">Logout</a>
     </nav>
 
     <div id="container" class="container">
@@ -62,9 +62,9 @@
                 <td>{{ $item['password'] }}</td>
                 <td>{{ $item['type'] }}</td>
                 <td>
-                    <a href="/home/edit/{{ $item['user_id'] }}">Edit</a> |
-                    <a href="/home/delete/{{ $item['user_id'] }}">Delete</a> |
-                    <a href="/home/details/{{ $item['user_id'] }}">Details</a>
+                    <a href="{{ route('home.editUser', $item['user_id']) }}">Edit</a> |
+                    <a href="{{ route('home.deleteUser', $item['user_id']) }}">Delete</a> |
+                    <a href="{{ route('home.userDetails', $item['user_id']) }}">Details</a>
                 </td>
             </tr>
             @endforeach

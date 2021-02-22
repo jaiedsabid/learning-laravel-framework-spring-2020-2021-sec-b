@@ -18,9 +18,9 @@
 </head>
 <body>
     <nav>
-        <a href="/home">Home</a>
-        <a href="/home/userlist">User list</a>
-        <a href="/logout">Logout</a>
+        <a href="{{ route('home.index') }}">Home</a>
+        <a href="{{ route('home.userList') }}">User list</a>
+        <a href="{{ route('logout.index') }}">Logout</a>
     </nav>
     <h1>Welcome {{ session('username') }}!</h1>
     <div class="error-msg">

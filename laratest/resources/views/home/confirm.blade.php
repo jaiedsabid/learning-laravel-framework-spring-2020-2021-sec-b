@@ -26,6 +26,12 @@
             form {
                 text-align: center;
             }
+            .message {
+                text-align: center;
+                margin-top: 32px;
+                color: red;
+                font-weight: bold;
+            }
     </style>
 </head>
 <body>
@@ -37,6 +43,9 @@
             <input type="text" name="confirm" id="confirm">
             <input type="submit" value="submit">
         </form>
+        <div class="message">
+            {{ $errors->first('confirm') }}
+        </div>
     </div>
 </body>
 </html>

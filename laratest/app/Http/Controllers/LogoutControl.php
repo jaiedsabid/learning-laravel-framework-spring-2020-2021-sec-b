@@ -8,6 +8,6 @@ class LogoutControl extends Controller
 {
     public function index(Request $req) {
         $req->session()->flush();
-        return redirect('/login');
+        return redirect()->route('login.index');
     }
 }

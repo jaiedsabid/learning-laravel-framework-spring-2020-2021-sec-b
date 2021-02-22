@@ -16,14 +16,46 @@
         form {
             margin: 0 auto;
             padding: 10px;
-            width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        #error-message {
-            margin: 0 auto;
-            padding: 10px;
+        fieldset {
             width: 600px;
-            color: #ff0000;
+            min-width: 300px;
+        }
+        .container {
+            display: flex;
+        }
+        .form-group {
+            flex: 1 0 300px;
             text-align: center;
+        }
+        label {
+            display: block;
+        }
+        label[for="password"] {
+            margin-top: 5px;
+        }
+        .warning {
+            flex: 1 0 300px;
+            color: red;
+            font-weight: bold;
+        }
+        input[type="submit"] {
+            margin-top: 5px;
+        }
+        .warning>div:nth-child(2) {
+            margin-top: 10px;
+        }
+        @media screen and (max-width: 559px) {
+            .container {
+                flex-wrap: wrap;
+                text-align: center;
+            }
+            .warning {
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
@@ -32,17 +64,23 @@
         @csrf
         <fieldset>
             <legend>Login</legend>
-            <label for="username">Username:
-                <input id="username" name="username" type="text">
-            </label>
-            <label for="password">Password:
-                <input id="password" name="password" type="password">
-            </label>
-            <input type="submit" value="login">
+            <div class="container">
+                <div class="form-group">
+                    <label for="username">Username:
+                        <input id="username" name="username" type="text">
+                    </label>
+                    <label for="password">Password:
+                        <input id="password" name="password" type="password">
+                    </label>
+                    <input type="submit" value="login">
+                </div>
+                <div class="warning">
+                    <div>{{ $errors->first('username') }}</div>
+                    <div>{{ $errors->first('password') }}</div>
+                    <div>{{ session('error-msg') }}</div>
+                </div>
+            </div>
         </fieldset>
     </form>
-    <div id="error-message">
-        {{ session('error-msg') }}
-    </div>
 </body>
 </html>
