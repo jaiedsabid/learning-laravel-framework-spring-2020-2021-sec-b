@@ -1,81 +1,78 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User List</title>
-    <style>
+@extends('layout.common')
+
+    @section('title')
+        User List
+    @endsection
+
+    @section('css')
         table, th, td {
-            border: 1px solid black;
+        border: 1px solid black;
         }
         td {
-            padding: 3px;
-            text-align: center;
+        padding: 3px;
+        text-align: center;
         }
         nav a:nth-child(1) {
-            margin-left: 0px;
+        margin-left: 0px;
         }
         nav a {
-            margin-left: 10px;
+        margin-left: 10px;
         }
         .error-message {
-            margin-top: 10px;
-            font-weight: bold;
-            color: red;
+        margin-top: 10px;
+        font-weight: bold;
+        color: red;
         }
         .success-message {
-            margin-top: 10px;
-            font-weight: bold;
-            color: green;
+        margin-top: 10px;
+        font-weight: bold;
+        color: green;
         }
+        @endsection
 
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="{{ route('home.index') }}">Back</a>
-        <a href="{{ route('home.createUser') }}">Create User</a>
-        <a href="{{ route('logout.index') }}">Logout</a>
-    </nav>
-
-    <div id="container" class="container">
+    @section('page-title')
         <h1>User List</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>USERNAME</th>
-                <th>EMAIL</th>
-                <th>PASSWORD</th>
-                <th>USER TYPE</th>
-                <th>ACTION</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($list as $item)
-            <tr>
-                <td>{{ $item['user_id'] }}</td>
-                <td>{{ $item['username'] }}</td>
-                <td>{{ $item['email'] }}</td>
-                <td>{{ $item['password'] }}</td>
-                <td>{{ $item['type'] }}</td>
-                <td>
-                    <a href="{{ route('home.editUser', $item['user_id']) }}">Edit</a> |
-                    <a href="{{ route('home.deleteUser', $item['user_id']) }}">Delete</a> |
-                    <a href="{{ route('home.userDetails', $item['user_id']) }}">Details</a>
-                </td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
+    @endsection
+
+    @section('main-content')
+        <div id="container" class="container">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>USERNAME</th>
+                    <th>EMAIL</th>
+                    <th>PASSWORD</th>
+                    <th>USER TYPE</th>
+                    <th>ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($list as $item)
+                    <tr>
+                        <td>{{ $item['user_id'] }}</td>
+                        <td>{{ $item['username'] }}</td>
+                        <td>{{ $item['email'] }}</td>
+                        <td>{{ $item['password'] }}</td>
+                        <td>{{ $item['type'] }}</td>
+                        <td>
+                            <a href="{{ route('home.editUser', $item['user_id']) }}">Edit</a> |
+                            <a href="{{ route('home.deleteUser', $item['user_id']) }}">Delete</a> |
+                            <a href="{{ route('home.userDetails', $item['user_id']) }}">Details</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endsection
+
+    @section('message')
         <div class="error-message">
             {{ session('error-msg') }}
         </div>
         <div class="success-message">
             {{ session('success-msg') }}
         </div>
-    </div>
-</body>
-</html>
+    @endsection
