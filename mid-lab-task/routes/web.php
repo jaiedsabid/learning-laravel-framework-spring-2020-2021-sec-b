@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'Login@index')->name('login.index');
 Route::post('/login', 'Login@verify')->name('login.verify');
 
-Route::get('/home', 'Home@index')->name('home.index');
+Route::middleware([CheckSession::class])->group(function () {
+    Route::get('/home', 'Home@index')->name('home.index');
+});
 
 Route::get('/', function () {
     return redirect()->route('login.index');

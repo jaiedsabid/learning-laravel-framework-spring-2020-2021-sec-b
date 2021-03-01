@@ -1,4 +1,5 @@
 @extends('layout.common')
+
     @section('title')
         Home
     @endsection

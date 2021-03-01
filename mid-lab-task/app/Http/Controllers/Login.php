@@ -15,12 +15,13 @@ class Login extends Controller
 
     public function verify(LoginCheck $req)
     {
-        $user_x = Customer::where($req->email)
-                            ->where($req->password)
+        $user_x = Customer::where('email', $req->email)
+                            ->where('password', $req->password)
                             ->get();
 
         if(count($user_x) > 0)
         {
+            $req->session()->put('username', $user_x[0]['username']);
             return redirect()->route('home.index');
         }
     }
