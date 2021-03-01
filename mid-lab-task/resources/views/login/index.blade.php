@@ -11,7 +11,7 @@
     <form action="" method="POST">
         @csrf
         <label for="email">Email:
-            <input type="email" name="email">
+            <input type="email" name="email" value="{{ @old('email') }}">
         </label> <br>
         <label for="password">Password:
             <input type="password" name="password">

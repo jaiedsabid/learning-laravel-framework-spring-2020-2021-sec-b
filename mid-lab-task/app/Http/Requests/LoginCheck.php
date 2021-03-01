@@ -28,4 +28,11 @@ class LoginCheck extends FormRequest
             'password' => 'required|min:8|max:20|regex:/[a-zA-Z0-9]/i'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'password.regex' => 'Password must be in alphanumeric values.'
+        ];
+    }
 }

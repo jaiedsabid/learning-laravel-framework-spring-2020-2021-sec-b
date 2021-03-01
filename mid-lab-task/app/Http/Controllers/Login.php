@@ -24,5 +24,10 @@ class Login extends Controller
             $req->session()->put('username', $user_x[0]['username']);
             return redirect()->route('home.index');
         }
+        else
+        {
+            $req->session()->flash('error-msg', 'Invalid username or password');
+            return redirect()->route('login.index');
+        }
     }
 }
