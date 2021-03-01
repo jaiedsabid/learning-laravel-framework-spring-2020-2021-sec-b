@@ -25,8 +25,8 @@ class SignupRequest extends FormRequest
     {
         return [
             'fullname' => 'required|min:3|max:30|regex:/[a-zA-Z]/i',
-            'username' => 'required',
-            'email' => 'email:rfc|required|min:10|max:50',
+            'username' => 'required|unique:customers,username',
+            'email' => 'email:rfc|required|min:10|max:50|unique:customers,email',
             'password' => 'required|confirmed|min:8|max:20|regex:/[a-zA-Z0-9]/i',
             'city' => 'required|min:3|max:20',
             'country' => 'required|min:3|max:20',
