@@ -18,6 +18,7 @@ Route::post('/login', 'Login@verify')->name('login.verify');
 
 Route::middleware([CheckSession::class])->group(function () {
     Route::get('/home', 'Home@index')->name('home.index');
+    Route::get('/logout', 'Logout@index')->name('logout.index');
 });
 
 Route::get('/', function () {
