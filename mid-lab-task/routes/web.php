@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'Login@index')->name('login.index');
 Route::post('/login', 'Login@verify')->name('login.verify');
 
+Route::get('/signup', 'Signup@index')->name('signup.index');
+Route::post('/signup', 'Signup@store')->name('signup.store');
+
 Route::middleware([CheckSession::class])->group(function () {
     Route::get('/home', 'Home@index')->name('home.index');
     Route::get('/logout', 'Logout@index')->name('logout.index');

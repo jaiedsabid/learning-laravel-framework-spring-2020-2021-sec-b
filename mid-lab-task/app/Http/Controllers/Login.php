@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginCheck;
+use App\Http\Requests\LoginRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class Login extends Controller
         return view('login.index');
     }
 
-    public function verify(LoginCheck $req)
+    public function verify(LoginRequest $req)
     {
         $user_x = Customer::where('email', $req->email)
                             ->where('password', $req->password)
@@ -26,7 +26,7 @@ class Login extends Controller
         }
         else
         {
-            $req->session()->flash('error-msg', 'Invalid username or password');
+            $req->session()->flash('error-msg', 'Incorrect username or password');
             return redirect()->route('login.index');
         }
     }
