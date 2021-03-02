@@ -22,6 +22,9 @@ Route::post('/signup', 'Signup@store')->name('signup.store');
 Route::middleware([CheckSession::class])->group(function () {
     Route::get('/home', 'Home@index')->name('home.index');
     Route::get('/logout', 'Logout@index')->name('logout.index');
+
+    Route::get('/system/sales', 'Sales@index')->name('sales.index');
+    Route::get('/system/sales/physical_store', 'Sales@physical')->name('sales.physical');
 });
 
 Route::get('/', function () {
