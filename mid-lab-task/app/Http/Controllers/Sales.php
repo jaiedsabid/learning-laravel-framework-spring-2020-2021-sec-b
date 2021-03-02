@@ -15,6 +15,7 @@ class Sales extends Controller
 
     public function physical()
     {
-
+        $items = PhysicalStore::where('date_sold', '>=', date('y-m-d'))->get();
+        return view('sales.physical_store')->with('sold_items', $items);
     }
 }
