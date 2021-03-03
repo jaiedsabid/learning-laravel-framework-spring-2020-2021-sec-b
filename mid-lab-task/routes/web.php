@@ -25,6 +25,7 @@ Route::middleware([CheckSession::class])->group(function () {
 
     Route::get('/system/sales', 'Sales@index')->name('sales.index');
     Route::get('/system/sales/physical_store', 'Sales@physical')->name('sales.physical');
+    Route::post('/system/sales/physical_store', 'Sales@store')->name('sales.store');
 });
 
 Route::get('/', function () {
