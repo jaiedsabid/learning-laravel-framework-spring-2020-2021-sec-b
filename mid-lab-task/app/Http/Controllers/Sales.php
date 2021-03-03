@@ -51,7 +51,7 @@ class Sales extends Controller
         }
         else
         {
-            $req->session()->flash('error-msg', 'Information stored successfully');
+            $req->session()->flash('error-msg', 'Information stored failed');
             return redirect()->route('sales.store');
         }
     }
