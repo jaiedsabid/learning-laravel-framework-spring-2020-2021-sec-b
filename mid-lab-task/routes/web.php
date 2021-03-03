@@ -26,6 +26,13 @@ Route::middleware([CheckSession::class])->group(function () {
     Route::get('/system/sales', 'Sales@index')->name('sales.index');
     Route::get('/system/sales/physical_store', 'Sales@physical')->name('sales.physical');
     Route::post('/system/sales/physical_store', 'Sales@store')->name('sales.store');
+
+    Route::get('system/product_management', 'ProductManage@index')->name('product_manage.index');
+
+    Route::get('system/product_management/existing_products', 'ProductManage@existing_products')->name('products.existing');
+    Route::get('system/product_management/upcoming_products', 'ProductManage@upcoming_products')->name('products.upcoming');
+    Route::get('system/product_management/add_product', 'ProductManage@add_product')->name('products.add');
+    Route::post('system/product_management/add_product', 'ProductManage@store_product')->name('products.store');
 });
 
 Route::get('/', function () {
