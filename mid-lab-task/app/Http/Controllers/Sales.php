@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRequest;
 use App\Models\PhysicalStore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Count;
 
 class Sales extends Controller
 {
@@ -18,8 +20,8 @@ class Sales extends Controller
     {
         $items = PhysicalStore::where('date_sold', '>=', date('y-m-d'))->get();
         $seven = PhysicalStore::where('date_sold', '>=', 'DATE(NOW()) - INTERVAL 7 DAY')->get();
-        $avg = PhysicalStore::select('total_price')->where('date_sold', '>=', 'DATE(NOW()) - INTERVAL 7 DAY')->average('total_price');
-        $max_item = PhysicalStore::all()->max('product_name');
+        $avg = PhysicalStore::select('total_price')->where('date_sold', '>=', 'DATE(NOW()) - INTERVAL 30 DAY')->average('total_price');
+        $max_item = PhysicalStore::select('product_name', DB::raw('count(*) as total'))->groupBy('product_name')->max('product_name');
         return view('sales.physical_store')
             ->with('sold_items', $items)
             ->with('today', count($items))
