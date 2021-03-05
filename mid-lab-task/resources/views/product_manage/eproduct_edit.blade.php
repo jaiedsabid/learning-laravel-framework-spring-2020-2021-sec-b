@@ -45,7 +45,12 @@
                 </tr>
                 <tr>
                     <td>STATUS: </td>
-                    <td><input type="text" name="status" value="{{ $item->status }}"></td>
+                    <td>
+                        <select name="status" id="status">
+                            <option value="existing" @if($item->status == 'existing') selected @endif>Existing</option>
+                            <option value="upcoming" @if($item->status == 'upcoming') selected @endif>Upcoming</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>LAST UPDATED: </td>
