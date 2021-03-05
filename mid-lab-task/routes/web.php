@@ -33,6 +33,12 @@ Route::middleware([CheckSession::class])->group(function () {
     Route::get('system/product_management/upcoming_products', 'ProductManage@upcoming_products')->name('products.upcoming');
     Route::get('system/product_management/add_product', 'ProductManage@add_product')->name('products.add');
     Route::post('system/product_management/add_product', 'ProductManage@store_product')->name('products.store');
+
+    Route::get('system/product_management/existing_products/view/{id}', 'ProductManage@ex_view')->name('eproduct.ex_view');
+    Route::get('system/product_management/existing_products/edit/{id}', 'ProductManage@ex_edit')->name('eproduct.ex_edit');
+    Route::post('system/product_management/existing_products/edit/{id}', 'ProductManage@ex_update')->name('eproduct.ex_update');
+    Route::get('system/product_management/existing_products/delete/{id}', 'ProductManage@ex_delete')->name('eproduct.ex_delete');
+    Route::post('system/product_management/existing_products/delete/{id}', 'ProductManage@ex_distroy')->name('eproduct.ex_distroy');
 });
 
 Route::get('/', function () {
