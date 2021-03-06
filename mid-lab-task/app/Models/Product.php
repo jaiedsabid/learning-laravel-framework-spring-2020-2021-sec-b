@@ -11,6 +11,5 @@ class Product extends Model
 
     protected $table = 'products';
     protected $primaryKey = 'id';
-    public $timestamps = ['updated_at'];
-    const UPDATED_AT = 'last_updated';
+    public $timestamps = false;
 }

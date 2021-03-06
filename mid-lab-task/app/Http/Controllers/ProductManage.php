@@ -31,12 +31,29 @@ class ProductManage extends Controller
 
     public function add_product()
     {
-
+        return view('product_manage.add_product');
     }
 
-    public function store_product()
+    public function store_product(Request $req)
     {
+        $item = new Product();
+        $item->product_name = $req->product_name;
+        $item->category = $req->category;
+        $item->unit_price = $req->unit_price;
+        $item->status = $req->status;
+        $item->last_updated = $req->last_updated;
+        $success = $item->save();
 
+        if($success)
+        {
+            $req->session()->flash('success', 'Product added successfully');
+            return redirect()->route('product_manage.index');
+        }
+        else
+        {
+            $req->session()->flash('error-msg', 'Faild to add the product!');
+            return redirect()->back();
+        }
     }
 
     public function view($id)

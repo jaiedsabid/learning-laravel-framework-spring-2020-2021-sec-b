@@ -7,7 +7,7 @@
                 <ul>
                     <li><a href="{{ route('products.existing') }}">Existing Products</a></li>
                     <li><a href="{{ route('products.upcoming') }}">Upcoming Products</a></li>
-                    <li><a href="{{ route('products.add') }}">Add Products</a></li>
+                    <li><a href="{{ route('products.add') }}">Add Product</a></li>
                 </ul>
             </li>
             <li><a href="{{ route('logout.index') }}">Logout</a></li>
