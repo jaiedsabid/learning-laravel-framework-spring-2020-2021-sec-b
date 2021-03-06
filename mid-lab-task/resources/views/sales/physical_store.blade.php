@@ -17,6 +17,20 @@
         .sell-item > form > label > input {
             display: block;
         }
+        .sales-log {
+            display: block;
+            margin: 15px 10px;
+        }
+        .sales-log button {
+            width: 150px;
+            height: 50px;
+        }
+        .sales-log a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: large;
+            color: #2d3748;
+        }
     @endsection
 
     @section('title')
@@ -28,6 +42,11 @@
     @endsection
 
     @section('content')
+        <div class="sales-log">
+            <button>
+                <a href="{{ route('sales.log') }}">View Sales Log</a>
+            </button>
+        </div>
         <div class="sold-items">
             <div class="highlight">
                 <h4>Total Sale Today: {{ $today }}</h4>

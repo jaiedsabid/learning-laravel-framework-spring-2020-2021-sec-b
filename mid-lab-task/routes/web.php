@@ -27,6 +27,10 @@ Route::middleware([CheckSession::class])->group(function () {
     Route::get('/system/sales/physical_store', 'Sales@physical')->name('sales.physical');
     Route::post('/system/sales/physical_store', 'Sales@store')->name('sales.store');
 
+    Route::get('/system/sales/physical_store/sales_log', 'Sales@log')->name('sales.log'); // Sales Log
+    Route::post('/system/sales/physical_store/sales_log', 'Sales@import')->name('sales.log_import'); // Import Log
+    Route::get('/system/sales/physical_store/sales_log/export', 'Sales@export')->name('sales.log_export'); // Export Log
+
     Route::get('system/product_management', 'ProductManage@index')->name('product_manage.index');
 
     Route::get('system/product_management/existing_products', 'ProductManage@existing_products')->name('products.existing');

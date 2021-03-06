@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalesLogRequest;
 use App\Http\Requests\StoreRequest;
 use App\Models\PhysicalStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PHPUnit\Framework\Constraint\Count;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SalesLogExport;
+use App\Imports\SalesLogImport;
 
 class Sales extends Controller
 {
@@ -61,5 +64,23 @@ class Sales extends Controller
             $req->session()->flash('error-msg', 'Information stored failed');
             return redirect()->route('sales.store');
         }
+    }
+
+    public function log()
+    {
+        return view('sales.log');
+    }
+
+    public function export()
+    {
+        return Excel::download(new SalesLogExport, 'sales_log.xlsx');
+    }
+
+    public function import(SalesLogRequest $req)
+    {
+        Excel::import(new SalesLogImport, $req->file('import'));
+
+        $req->session()->flash('message', 'Log imported');
+        return redirect()->route('sales.log');
     }
 }
