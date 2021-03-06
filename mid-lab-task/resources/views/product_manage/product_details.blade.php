@@ -56,7 +56,11 @@
                         <td></td>
                         <td>
                             <button id="delete">
-                                <a href="{{ route('eproduct.ex_delete', $item->id) }}">Delete</a>
+                                @if(Route::currentRouteName() == 'uproduct.view')
+                                    <a href="{{ route('uproduct.delete', $item->id) }}">Delete</a>
+                                @else
+                                    <a href="{{ route('eproduct.delete', $item->id) }}">Delete</a>
+                                @endif
                             </button>
                         </td>
                     </tr>

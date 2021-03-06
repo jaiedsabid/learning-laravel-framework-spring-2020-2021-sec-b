@@ -25,7 +25,8 @@ class ProductManage extends Controller
 
     public function upcoming_products()
     {
-
+        $items = Product::where('status', '=', 'upcoming')->simplePaginate(20);
+        return view('product_manage.upcoming_products')->with('products', $items);
     }
 
     public function add_product()
@@ -38,19 +39,19 @@ class ProductManage extends Controller
 
     }
 
-    public function ex_view($id)
+    public function view($id)
     {
         $item = Product::find($id);
-        return view('product_manage.eproducts_details')->with('item', $item);
+        return view('product_manage.product_details')->with('item', $item);
     }
 
-    public function ex_edit($id)
+    public function edit($id)
     {
         $item = Product::find($id);
-        return view('product_manage.eproduct_edit')->with('item', $item);
+        return view('product_manage.product_edit')->with('item', $item);
     }
 
-    public function ex_update($id, Request $req)
+    public function update($id, Request $req)
     {
         $item = Product::find($id);
         $item->product_name = $req->product_name;
@@ -71,22 +72,36 @@ class ProductManage extends Controller
         }
     }
 
-    public function ex_delete($id)
+    public function delete($id)
     {
         $item = Product::find($id);
-        return view('product_manage.eproduct_delete')->with('item', $item);
+        return view('product_manage.product_delete')->with('item', $item);
     }
 
-    public function ex_distroy($id, ProductManageRequest $req)
+    public function e_destroy($id, ProductManageRequest $req)
     {
         if(Product::destroy($id))
         {
             $req->session()->flash('success', 'Product removed successfully.');
+            return redirect()->route('products.existing');
         }
         else
         {
             $req->session()->flash('error-msg', 'Failed to remove the Product!');
-            redirect()->route('products.existing');
+            return redirect()->back();
+        }
+    }
+    public function u_destroy($id, ProductManageRequest $req)
+    {
+        if(Product::destroy($id))
+        {
+            $req->session()->flash('success', 'Product removed successfully.');
+            return redirect()->route('products.upcoming');
+        }
+        else
+        {
+            $req->session()->flash('error-msg', 'Failed to remove the Product!');
+            return redirect()->back();
         }
     }
 

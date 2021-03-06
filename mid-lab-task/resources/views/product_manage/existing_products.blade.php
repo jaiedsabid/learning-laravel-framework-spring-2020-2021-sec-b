@@ -64,9 +64,9 @@
                         <td>{{ $product->status }}</td>
                         <td>{{ $product->last_updated }}</td>
                         <td>
-                            <a href="{{ route('eproduct.ex_view', $product->id) }}">View</a> |
-                            <a href="{{ route('eproduct.ex_edit', $product->id) }}">Edit</a> |
-                            <a href="{{ route('eproduct.ex_delete', $product->id) }}">Delete</a>
+                            <a href="{{ route('eproduct.view', $product->id) }}">View</a> |
+                            <a href="{{ route('eproduct.edit', $product->id) }}">Edit</a> |
+                            <a href="{{ route('eproduct.delete', $product->id) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
