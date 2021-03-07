@@ -20,8 +20,13 @@
             cursor: pointer;
         }
         .message {
-            margin-top: 15px;
+            margin: 10px 0px;
             color: green;
+            font-weight: bold;
+        }
+        .error {
+            margin: 10px 0px;
+            color: red;
             font-weight: bold;
         }
     @endsection
@@ -57,6 +62,11 @@
             </div>
             <div class="message">
                 {{ session('message') }}
+            </div>
+            <div class="error">
+                @foreach($errors->all() as $error)
+                    {{ $error }} <br>
+                @endforeach
             </div>
         </div>
     @endsection

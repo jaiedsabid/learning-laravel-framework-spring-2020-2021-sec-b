@@ -89,9 +89,13 @@ class Sales extends Controller
 
     public function import(SalesLogRequest $req)
     {
-        Excel::import(new SalesLogImport, $req->file('import'));
+        $success = Excel::import(new SalesLogImport, $req->file('import'));
 
-        $req->session()->flash('message', 'Log imported');
+        if($success)
+        {
+            $req->session()->flash('message', 'Log imported');
+        }
+
         return redirect()->route('sales.log');
     }
 }

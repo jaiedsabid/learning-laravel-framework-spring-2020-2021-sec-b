@@ -27,4 +27,11 @@ class SalesLogRequest extends FormRequest
             'import' => 'file|mimes:xlsx,xls|max:5000'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'import.max' => 'The file size may not be grater than 5MB',
+        ];
+    }
 }
