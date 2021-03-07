@@ -3,10 +3,12 @@
 namespace App\Exports;
 
 use App\Models\PhysicalStore;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class SalesLogExport implements FromCollection
 {
+    use Exportable;
     /**
     * @return \Illuminate\Support\Collection
     */

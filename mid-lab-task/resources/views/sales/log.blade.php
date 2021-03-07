@@ -37,9 +37,12 @@
     @section('content')
         <div class="log">
             <div class="export">
-                <h4>Download sales logs as Excel file</h4>
+                <h4>Download sales logs as Excel file or PDF</h4>
                 <button>
-                    <a href="{{ route('sales.log_export') }}">Download Log</a>
+                    <a href="{{ route('sales.log_export') }}">Download XLSX</a>
+                </button>
+                <button>
+                    <a href="{{ route('sales.log_export_pdf') }}">Download PDF</a>
                 </button>
             </div>
             <div class="import">

@@ -29,7 +29,8 @@ Route::middleware([CheckSession::class])->group(function () {
 
     Route::get('/system/sales/physical_store/sales_log', 'Sales@log')->name('sales.log'); // Sales Log
     Route::post('/system/sales/physical_store/sales_log', 'Sales@import')->name('sales.log_import'); // Import Log
-    Route::get('/system/sales/physical_store/sales_log/export', 'Sales@export')->name('sales.log_export'); // Export Log
+    Route::get('/system/sales/physical_store/sales_log/export', 'Sales@export')->name('sales.log_export'); // Export Log as xlsx
+    Route::get('/system/sales/physical_store/sales_log/export_pdf', 'Sales@export_pdf')->name('sales.log_export_pdf'); // Export Log as PDF
 
     Route::get('system/product_management', 'ProductManage@index')->name('product_manage.index');
 

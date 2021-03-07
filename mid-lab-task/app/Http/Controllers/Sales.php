@@ -13,6 +13,13 @@ use App\Imports\SalesLogImport;
 
 class Sales extends Controller
 {
+    private $excel;
+
+    public function __construct(Excel $excel)
+    {
+        $this->excel = $excel;
+    }
+
     public function index()
     {
         $items = PhysicalStore::all();
@@ -74,6 +81,10 @@ class Sales extends Controller
     public function export()
     {
         return Excel::download(new SalesLogExport, 'sales_log.xlsx');
+    }
+    public function export_pdf()
+    {
+        return (new SalesLogExport)->download('sales_log.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 
     public function import(SalesLogRequest $req)
